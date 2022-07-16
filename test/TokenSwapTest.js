@@ -7,20 +7,19 @@ contract("TokenSwap", (accounts) => { let token;
     const amount1 = 1000;
     const amount2= 2000;
      
-beforeEach(async () => { 
+it("should deploy contract",async () => { 
     // let contract_addr= await Token.deployed();
     
     erc20Token1 = await ERC20Token.deployed();
     erc20Token2 = await ERC20Token.deployed();
-    tokenSwap = await TokenSwap.new(erc20Token1.address,accounts[0],1000,erc20Token2.address,accounts[1],2000); 
+    tokenSwap = await TokenSwap.new(erc20Token1.address,accounts[0],100,erc20Token2.address,accounts[1],100); 
+    assert(tokenSwap!==undefined, "Not deployed contract")
     
 });
 
 
 it("should not allow swapping if called by non-owner", async () => {
-    // console.log(accounts[2])
-    // console.log(await tokenSwap.token1addr()) 
-    await expectRevert(tokenSwap.swap({from:accounts[5]}),"Not authorized");
+    await expectRevert(tokenSwap.swap({from:accounts[2]}),"Not authorized");
 });
 
 it("should swap token1 when approved", async () => { let allowance; let receipt; const value = web3.utils.toBN(100);
@@ -35,11 +34,16 @@ it("should swap token1 when approved", async () => { let allowance; let receipt;
 });   
 
 it("should not swap token1 if not approved", async () => { 
+<<<<<<< HEAD
     //const value = web3.utils.toBN(90);
     //await expectRevert(erc20Token1.approve(tokenSwap.address,value), "Token1 allowance too low" ); 
     const a= await erc20Token1.allowance(accounts[0],tokenSwap.address);
     console.log(Number(a));
     assert.isAtLeast(Number(a),0, " allowance is too low");
+=======
+     await expectRevert( tokenSwap.swap({from:accounts[1]}), "Token 2 allowance too low" );
+    
+>>>>>>> 928eb1a1507aa817050e5ff9dbeb6dd0e759d6e1
 });
 
 
@@ -53,11 +57,17 @@ it("should swap token2 when approved", async () => { let allowance; let receipt;
     assert(allowance.eq(value));
 });   
 
+<<<<<<< HEAD
  it("should not swap token2 if not approved", async () => { 
      const a= await erc20Token2.allowance(accounts[1],tokenSwap.address);
     console.log(Number(a));
     assert.isAtLeast(Number(a),0, " allowance is too low");
  });
+=======
+it("should  swap token2 if approved", async () => { 
+    await  tokenSwap.swap({from:accounts[1]}) ;
+});
+>>>>>>> 928eb1a1507aa817050e5ff9dbeb6dd0e759d6e1
 
 
 

@@ -4,25 +4,28 @@ const ERC20Token = artifacts.require("MyToken.sol");
 //const erc20 = artifacts.require("IERC20.sol");
 
 contract("TokenSwap", (accounts) => { let token; 
-    const amount1 = web3.utils.toBN(web3.utils.toWei("1"));
-    const amount2= web3.utils.toBN(web3.utils.toWei("2"));
+    const amount1 = web3.utils.toBN(1);
+    const amount2 = web3.utils.toBN(2);
      
 beforeEach(async () => { 
     // let contract_addr= await Token.deployed();
-    tokenSwap = await TokenSwap.deployed(); 
     erc20Token = await ERC20Token.deployed();
+    erc20Token1 = await ERC20Token.deployed();
+    tokenSwap = await TokenSwap.new(erc20Token.address, accounts[0],amount1, erc20Token1.address, accounts[1], amount2); 
+   
 });
+
 
 it("should not allow swapping if called by non-owner", async () => {
     await expectRevert(tokenSwap.swap(),"Not authorized");
 });
 
 it("should swap token1 when approved", async () => { let allowance; let receipt; const value = web3.utils.toBN(100);
-
+    await erc20Token.mint(accounts[1],value);
     allowance = await erc20Token.allowance(accounts[1], tokenSwap.address);
     assert(allowance.isZero(),"Not Zero");
     
-    receipt = await erc20Token.approve(tokenSwap.address, value); //accounts[0] has approved accounts[1] for 100 tokens
+    receipt = await erc20Token.approve(tokenSwap.address, value, {from:accounts[1]}); //accounts[0] has approved accounts[1] for 100 tokens
     allowance = await erc20Token.allowance(accounts[1], tokenSwap.address); //allowance =100
     console.log(Number(allowance))
     assert((allowance).eq(value), "Not equal to value");
@@ -34,7 +37,7 @@ it("should not swap token1 if not approved", async () => {
 
 
 it("should swap token2 when approved", async () => { let allowance; let receipt; const value = web3.utils.toBN(100);
-
+    
     allowance = await erc20Token.allowance(accounts[3], tokenSwap.address);
     assert(allowance.isZero());
     

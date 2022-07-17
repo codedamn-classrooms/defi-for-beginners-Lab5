@@ -65,9 +65,7 @@ contract TokenSwap is ERC20("sk", "sk") {
         require(sent, "Token transfer failed");
     }
 
-    function token1addr() public view returns (address){
-        return address(token1);
-    }
+   
 }
 
 

@@ -14,7 +14,8 @@
   "license": "ISC",
   "dependencies": {
   
-    "solc": "^0.8.15"
+    "solc": "^0.8.15",
+    "@openzeppelin/contracts": "^4.7.0"
  
   }
 }

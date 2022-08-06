@@ -13,8 +13,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@openzeppelin/test-helpers": "^0.5.15",
+  
     "solc": "^0.8.15",
     "@openzeppelin/contracts": "^4.7.0"
+ 
   }
 }

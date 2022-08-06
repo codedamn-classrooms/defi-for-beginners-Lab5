@@ -1,0 +1,2 @@
+tabs: ['contracts/TokenSwap.sol']
+terminal-one: yarn

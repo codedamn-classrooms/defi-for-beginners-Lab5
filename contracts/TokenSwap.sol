@@ -42,10 +42,10 @@ contract TokenSwap is ERC20("sk", "sk") {
 
     function swap() public {
         require(msg.sender == owner1 || msg.sender == owner2, "Not authorized");
-        require(
-            token1.allowance(owner1, address(this)) >= amount1,
-            "Token 1 allowance too low"
-        );
+        // require(
+        //     token1.allowance(owner1, address(this)) >= amount1,
+        //     "Token 1 allowance too low"
+        // );
         require(
             token2.allowance(owner2, address(this)) >= amount2,
             "Token 2 allowance too low"

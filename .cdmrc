@@ -1,2 +1,2 @@
 tabs: ['contracts/TokenSwap.sol']
-terminal-one: yarn
+terminal-one: npm install @openzeppelin/contracts

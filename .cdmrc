@@ -1,2 +1,3 @@
 tabs: ['contracts/TokenSwap.sol']
-terminal-one:yarn add @openzeppelin/contracts
+terminal-one: yarn
+terminal-two:yarn add @openzeppelin/contracts

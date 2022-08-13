@@ -16,7 +16,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 //     event Approval(address indexed tokenOwner,address indexed spender,uint256 tokens);
 // }
 
-contract TokenSwap is ERC20("sk", "sk") {
+contract TokenSwap is ERC20("token", "token") {
     IERC20 public token1;
     address public owner1;
     uint public amount1;

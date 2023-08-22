@@ -1,3 +1,3 @@
-tabs: ['contracts/TokenSwap.sol']
-//terminal-one: yarn
-terminal-one: yarn add @openzeppelin/contracts
+tabs: ['contracts/MyToken.sol','contracts/TokenSwap.sol']
+terminals: ['yarn install']
+run-button: truffle compile
